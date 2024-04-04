@@ -5,7 +5,7 @@ import javax.swing.JPanel;
 
 public class homePage {
    
-   public void displayWindow() {
+   public static void displayWindow() {
     JFrame frame = new JFrame();
 		frame.setBounds(100, 100, 300, 130);
         JPanel panel = new JPanel();
