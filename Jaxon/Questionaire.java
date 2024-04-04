@@ -1,4 +1,5 @@
 package Jaxon;
-public abstract class Questionaire {
+public class Questionaire extends Question {
+    
     
 }
