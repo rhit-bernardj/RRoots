@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  	<meta charset="utf-8">
+  	<meta name="viewport" content="initial-scale=1, width=device-width">
+  	
+  	<link rel="stylesheet"  href="./SideBar.css" />
+  	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jockey One:wght@400&display=swap" />
+  	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" />
+  	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" />
+  	
+  	
+  	
+</head>
+<body>
+  	
+  	<div class="side-bar">
+    		<div class="upper-sidebar">
+      			<div class="company-logo-dark">
+        				<img class="pxiconstar" alt="" src="36px/icon/star.svg">
+        				
+        				<div class="item">Roots</div>
+      			</div>
+      			<div class="search-dark">
+      			</div>
+      			<div class="item-list">
+        				<div class="items-dark">
+          					<img class="pxiconhome" alt="" src="24px/icon/home.svg">
+          					
+          					<div class="item1">Home</div>
+        				</div>
+        				<div class="items-dark1">
+          					<div class="pxiconhome1">
+          					</div>
+          					<div class="item2" id="popupitemText">Saved Results</div>
+        				</div>
+        				<img class="report-2-icon" alt="" src="report 2.png" id="popupreport2Icon">
+        				
+        				<div class="items-dark2">
+        				</div>
+        				<div class="items-dark3">
+        				</div>
+        				<div class="dropdown-dark">
+        				</div>
+      			</div>
+      			<div class="items-dark4">
+        				<img class="pxiconhome" alt="" src="24px/icon/box.svg">
+        				
+        				<div class="item1">Log out</div>
+      			</div>
+    		</div>
+    		<div class="lower-sidebar">
+      			<div class="lower-item-list">
+        				<div class="items-dark5">
+          					<img class="pxiconhome" alt="" src="24px/icon/help-circle.svg">
+          					
+          					<div class="item1">Help</div>
+        				</div>
+        				<div class="items-dark6">
+        				</div>
+        				<div class="items-dark6">
+        				</div>
+      			</div>
+      			<div class="profile-dark">
+        				<div class="avatar">
+          					<div class="avatar-child">
+          					</div>
+          					<b class="jv">DJ</b>
+        				</div>
+        				<div class="profile">
+          					<div class="julieta-valle">DJ  Bernard</div>
+          					<div class="lorem-ipsum-dolor">bernardj@rose-hulman.edu </div>
+        				</div>
+      			</div>
+    		</div>
+    		<img class="arrow-dark-icon" alt="" src="Arrow-dark.svg">
+    		
+  	</div>
+  	
+  	
+  	
+  	
+  	<script>
+    		var popupitemText = document.getElementById("popupitemText");
+    		if(popupitemText) {
+      			popupitemText.addEventListener("click", function (e) {
+        				window.location.href = "./Results.html"
+      			});
+    		}
+    		
+    		var popupreport2Icon = document.getElementById("popupreport2Icon");
+    		if(popupreport2Icon) {
+      			popupreport2Icon.addEventListener("click", function (e) {
+        				window.location.href = "./Results.html"
+      			});
+    		}</script></body>
+</html>
