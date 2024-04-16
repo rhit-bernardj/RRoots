@@ -1,10 +1,8 @@
 
 
-public class Question {
-    public String question;
-    public ArrayList<Answers> answerOptions();
+import java.util.ArrayList;
 
-    public ArrayList getUserResponse() {
-
-    }
+public abstract class Question {
+     String question = new String();
+     ArrayList answerOptions = new ArrayList<>();  
 }
