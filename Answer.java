@@ -1,19 +1,19 @@
 public class Answer {
-    private String artist;
-    private int points;
+    private String question;
+    private String option;
 
     // Constructor
-    public Answer(String artist, int points) {
-        this.artist = artist;
-        this.points = points;
+    public Answer(String question, String option) {
+        this.question = question;
+        this.option = option;
     }
 
     // Getters
-    public String getArtist() {
-        return artist;
+    public String getQuestion() {
+        return question;
     }
 
-    public int getPoints() {
-        return points;
+    public String getOption() {
+        return option;
     }
 }

@@ -23,10 +23,10 @@ public class Question {
      public static Question createQuestion1() {
          String questionText = "When you need a musical boost, what's your vibe?";
          List<String> options = Arrays.asList(
-             "Amp me up with intense beats (Hip-Hop/Rap, Electronic/Dance)",
-             "Let's get moving with uplifting rhythms (Pop )",
-             "I crave soul-touching melodies (R&B/Soul, Jazz, Blues)",
-             "Take me on a journey with deep lyrics (Indie, Rock/Alternative)",
+             "Amp me up with intense beats",
+             "Let's get moving with uplifting rhythms",
+             "I crave soul-touching melodies",
+             "Take me on a journey with deep lyrics",
              "Feel inspired by soul-lifting gospel and blues:"
          );
          return new Question(questionText, options);
