@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Music Taste Questionnaire</title>
   <style>
+    /* CSS styles */
     .div {
       background-color: #ffe1a8;
       display: flex;
@@ -14,11 +15,13 @@
       font-weight: 400;
       padding: 25px 41px 80px 18px;
     }
+
     @media (max-width: 991px) {
       .div {
         padding-right: 20px;
       }
     }
+
     .div-2 {
       align-self: stretch;
       display: flex;
@@ -27,17 +30,20 @@
       font-size: 42px;
       color: #7dbbc3;
     }
+
     @media (max-width: 991px) {
       .div-2 {
         max-width: 100%;
         flex-wrap: wrap;
       }
     }
+
     .div-3 {
       font-family: Jockey One, sans-serif;
       flex-grow: 1;
       flex-basis: auto;
     }
+
     .img {
       aspect-ratio: 1;
       object-fit: auto;
@@ -45,6 +51,7 @@
       width: 40px;
       margin-top: 14px;
     }
+
     .div-4 {
       border-radius: 47px;
       background-color: #e26d5c;
@@ -57,27 +64,32 @@
       font-size: 43px;
       padding: 67px 80px;
     }
+
     @media (max-width: 991px) {
       .div-4 {
         max-width: 100%;
         padding: 0 20px;
       }
     }
+
     .div-5 {
       color: #ffe1a8;
       font-family: Jockey One, sans-serif;
       align-self: center;
     }
+
     .div-6 {
       font-family: Jockey One, sans-serif;
       margin: 46px 0 0 11px;
     }
+
     @media (max-width: 991px) {
       .div-6 {
         max-width: 100%;
         margin-top: 40px;
       }
     }
+
     .div-7 {
       font-family: Jockey One, sans-serif;
       border-radius: 10px;
@@ -89,78 +101,13 @@
       margin: 40px 0 0 17px;
       padding: 36px 11px;
     }
+
     @media (max-width: 991px) {
       .div-7 {
         padding-right: 20px;
       }
     }
-    .div-8 {
-      font-family: Jockey One, sans-serif;
-      border-radius: 10px;
-      background-color: #7dbbc3;
-      width: 958px;
-      max-width: 100%;
-      align-items: start;
-      justify-content: center;
-      margin: 14px 0 0 17px;
-      padding: 32px 11px;
-    }
-    @media (max-width: 991px) {
-      .div-8 {
-        padding-right: 20px;
-      }
-    }
-    .div-9 {
-      font-family: Jockey One, sans-serif;
-      border-radius: 10px;
-      background-color: #7dbbc3;
-      width: 958px;
-      max-width: 100%;
-      align-items: start;
-      justify-content: center;
-      margin: 17px 0 0 17px;
-      padding: 36px 11px;
-    }
-    @media (max-width: 991px) {
-      .div-9 {
-        padding-right: 20px;
-      }
-    }
-    .div-10 {
-      font-family: Jockey One, sans-serif;
-      border-radius: 10px;
-      background-color: #7dbbc3;
-      width: 958px;
-      max-width: 100%;
-      align-items: start;
-      white-space: nowrap;
-      justify-content: center;
-      margin: 17px 0 0 17px;
-      padding: 32px 11px;
-    }
-    @media (max-width: 991px) {
-      .div-10 {
-        padding-right: 20px;
-        white-space: initial;
-      }
-    }
-    .div-11 {
-      font-family: Jockey One, sans-serif;
-      border-radius: 10px;
-      background-color: #7dbbc3;
-      width: 958px;
-      max-width: 100%;
-      align-items: start;
-      justify-content: center;
-      margin: 17px 0 78px 17px;
-      padding: 36px 11px;
-    }
-    @media (max-width: 991px) {
-      .div-11 {
-        padding-right: 20px;
-        margin-bottom: 40px;
-      }
-    }
+
     .div-12 {
       border-radius: 47px;
       background-color: #e26d5c;
@@ -173,11 +120,18 @@
       padding: 76px 60px;
       font: 64px Jockey One, sans-serif;
     }
+
     @media (max-width: 991px) {
       .div-12 {
         font-size: 40px;
         padding: 0 20px;
       }
+    }
+
+    /* Custom style for selected option */
+    .selected {
+      background-color: #fff;
+      color: #000;
     }
   </style>
 </head>
@@ -218,30 +172,32 @@
       for (var i = 0; i < question.options.length; i++) {
         var optionElement = document.createElement("div");
         optionElement.textContent = question.options[i];
-        optionElement.setAttribute("onclick", "selectOption(this)");
+        optionElement.addEventListener("click", function() {
+          selectOption(this);
+        });
         optionsContainer.appendChild(optionElement);
       }
     }
 
     // Function to handle option selection
     function selectOption(option) {
-      // Highlight selected option
-      var options = document.querySelectorAll("#options-container div");
-      for (var i = 0; i < options.length; i++) {
-        options[i].classList.remove("selected");
-      }
-      option.classList.add("selected");
+      // Toggle selected class
+      option.classList.toggle("selected");
     }
 
     // Function to submit answers
     function submitAnswers() {
-      // Retrieve selected option
-      var selectedOption = document.querySelector("#options-container .selected");
+      // Retrieve selected options
+      var selectedOptions = document.querySelectorAll("#options-container .selected");
 
-      if (selectedOption) {
-        var selectedText = selectedOption.textContent;
-        // Send selected answer to server or perform further actions
-        console.log("Selected option:", selectedText);
+      if (selectedOptions.length > 0) {
+        var selectedTexts = [];
+        // Get text of selected options
+        selectedOptions.forEach(function(selectedOption) {
+          selectedTexts.push(selectedOption.textContent);
+        });
+        // Send selected answers to server or perform further actions
+        console.log("Selected options:", selectedTexts);
       } else {
         console.log("Please select an option.");
       }
@@ -251,10 +207,10 @@
     var question1 = {
       text: "When you need a musical boost, what's your vibe?",
       options: [
-        "Amp me up with intense beats (Hip-Hop/Rap, Electronic/Dance)",
-        "Let's get moving with uplifting rhythms (Pop)",
-        "I crave soul-touching melodies (R&B/Soul, Jazz, Blues)",
-        "Take me on a journey with deep lyrics (Indie, Rock/Alternative)",
+        "Amp me up with intense beats",
+        "Let's get moving with uplifting rhythms",
+        "I crave soul-touching melodies",
+        "Take me on a journey with deep lyrics",
         "Feel inspired by soul-lifting gospel and blues:"
       ]
     };
