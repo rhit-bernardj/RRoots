@@ -150,10 +150,80 @@
         <!-- Options will be inserted here -->
       </div>
     </div>
-    <div id="submit-button" class="div-12" onclick="submitAnswers()">Curate Results</div>
+    <!-- Modified Curate Results button with link to results page -->
+    <a href="results.html" class="div-12" onclick="submitAnswers()">Curate Results</a>
   </div>
 
   <script>
+   function displayQuestion(question) {
+      var questionContainer = document.getElementById("question-container");
+      var optionsContainer = document.getElementById("options-container");
+
+      // Clear previous content
+      questionContainer.innerHTML = "";
+      optionsContainer.innerHTML = "";
+
+      // Display the question
+      var questionElement = document.createElement("div");
+      questionElement.textContent = question.text;
+      questionContainer.appendChild(questionElement);
+
+      // Display options
+      for (var i = 0; i < question.options.length; i++) {
+        var optionElement = document.createElement("div");
+        optionElement.textContent = question.options[i];
+        optionElement.setAttribute("onclick", "toggleOption(this)");
+        optionsContainer.appendChild(optionElement);
+      }
+    }
+
+    // Function to toggle option selection
+    function toggleOption(option) {
+      option.classList.toggle("selected");
+    }
+
+    // Function to submit answers
+    function submitAnswers() {
+      // Retrieve selected options
+      var selectedOptions = document.querySelectorAll("#options-container .selected");
+
+      if (selectedOptions.length > 0) {
+        var selectedTexts = [];
+        selectedOptions.forEach(function(option) {
+          selectedTexts.push(option.textContent);
+        });
+        // Send selected answers to server or perform further actions
+        console.log("Selected options:", selectedTexts);
+      } else {
+        console.log("Please select at least one option.");
+      }
+    }
+
+    var questions = [
+      {
+        text: "When you need a musical boost, what's your vibe?",
+        options: [
+          "Amp me up with intense beats (Hip-Hop/Rap, Electronic/Dance)",
+          "Let's get moving with uplifting rhythms (Pop)",
+          "I crave soul-touching melodies (R&B/Soul, Jazz, Blues)",
+          "Take me on a journey with deep lyrics (Indie, Rock/Alternative)",
+          "Feel inspired by soul-lifting gospel and blues:"
+        ]
+      },
+      {
+        text: "What draws you to a song first?",
+        options: [
+          "The storytelling in the lyrics",
+          "A catchy, memorable hook",
+          "The energy and rhythm that get me moving",
+          "The emotional pull of the vocals",
+          "The intricacy of the instrumental arrangement"
+        ]
+      }
+    ];
+
+    var currentQuestionIndex = 0;
+
     // Function to display the question and options
     function displayQuestion(question) {
       var questionContainer = document.getElementById("question-container");
@@ -172,51 +242,47 @@
       for (var i = 0; i < question.options.length; i++) {
         var optionElement = document.createElement("div");
         optionElement.textContent = question.options[i];
-        optionElement.addEventListener("click", function() {
-          selectOption(this);
-        });
+        optionElement.setAttribute("onclick", "selectOption(this)");
         optionsContainer.appendChild(optionElement);
       }
     }
 
     // Function to handle option selection
     function selectOption(option) {
-      // Toggle selected class
-      option.classList.toggle("selected");
+      // Highlight selected option
+      var options = document.querySelectorAll("#options-container div");
+      for (var i = 0; i < options.length; i++) {
+        options[i].classList.remove("selected");
+      }
+      option.classList.add("selected");
     }
 
     // Function to submit answers
     function submitAnswers() {
-      // Retrieve selected options
-      var selectedOptions = document.querySelectorAll("#options-container .selected");
+      // Retrieve selected option
+      var selectedOption = document.querySelector("#options-container .selected");
 
-      if (selectedOptions.length > 0) {
-        var selectedTexts = [];
-        // Get text of selected options
-        selectedOptions.forEach(function(selectedOption) {
-          selectedTexts.push(selectedOption.textContent);
-        });
-        // Send selected answers to server or perform further actions
-        console.log("Selected options:", selectedTexts);
+      if (selectedOption) {
+        var selectedText = selectedOption.textContent;
+        // Send selected answer to server or perform further actions
+        console.log("Selected option:", selectedText);
+
+        // Move to the next question
+        currentQuestionIndex++;
+        if (currentQuestionIndex < questions.length) {
+          displayQuestion(questions[currentQuestionIndex]);
+        } else {
+          // If all questions are answered, perform further actions (e.g., go to results page)
+          console.log("All questions answered");
+          // Replace this with the code to navigate to the results page
+        }
       } else {
         console.log("Please select an option.");
       }
     }
 
-    // Sample question data
-    var question1 = {
-      text: "When you need a musical boost, what's your vibe?",
-      options: [
-        "Amp me up with intense beats",
-        "Let's get moving with uplifting rhythms",
-        "I crave soul-touching melodies",
-        "Take me on a journey with deep lyrics",
-        "Feel inspired by soul-lifting gospel and blues:"
-      ]
-    };
-
-    // Display the first question
-    displayQuestion(question1);
+    // Display the first question initially
+    displayQuestion(questions[currentQuestionIndex]);
   </script>
 </body>
 </html>
