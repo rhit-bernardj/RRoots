@@ -1,27 +1,33 @@
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Results {
-    private Questionaire questionnaire;
+    private Questionaire questionaire;
 
     public Results(Questionaire questionnaire) {
-        this.questionnaire = questionnaire;
+        this.questionaire = questionnaire;
     }
 
     // Method to calculate the top artists based on selected answers
     public Map<String, Integer> calculateTopArtists() {
         Map<String, Integer> artistPoints = new HashMap<>();
-        List<Answer> selectedAnswers = questionnaire.getSelectedAnswers();
+        List<Answer> selectedAnswers = questionaire.getSelectedAnswers();
 
         // Sample artists data
-        Artists artists = new Artists();
+        String[] artists = {
+            "Kendrick Lamar", "Travis Scott", "Beyonce", "Frank Ocean", "Taylor Swift",
+            "Dua Lipa", "Green Day", "Foo Fighters", "Kamasi Washington", "Michael Buble",
+            "Gary Clark Jr.", "Keb' Mo'", "Fred Again..", "Calvin Harris", "Jon Pardi",
+            "Carrie Underwood", "Tame Impala", "The 1975", "Kirk Franklin", "Sunday Servis Choir"
+        };
 
         // Calculate points for each artist based on selected answers
         for (Answer answer : selectedAnswers) {
             String artist = answer.getArtist();
             int points = answer.getPoints();
-            if (artist != null && !artist.isEmpty()) {
+            if (Arrays.asList(artists).contains(artist)) {
                 artistPoints.put(artist, artistPoints.getOrDefault(artist, 0) + points);
             }
         }
