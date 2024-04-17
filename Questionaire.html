@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Music Taste Questionnaire</title>
+  <style>
+    .div {
+      background-color: #ffe1a8;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: #fff;
+      font-weight: 400;
+      padding: 25px 41px 80px 18px;
+    }
+    @media (max-width: 991px) {
+      .div {
+        padding-right: 20px;
+      }
+    }
+    .div-2 {
+      align-self: stretch;
+      display: flex;
+      align-items: start;
+      gap: 20px;
+      font-size: 42px;
+      color: #7dbbc3;
+    }
+    @media (max-width: 991px) {
+      .div-2 {
+        max-width: 100%;
+        flex-wrap: wrap;
+      }
+    }
+    .div-3 {
+      font-family: Jockey One, sans-serif;
+      flex-grow: 1;
+      flex-basis: auto;
+    }
+    .img {
+      aspect-ratio: 1;
+      object-fit: auto;
+      object-position: center;
+      width: 40px;
+      margin-top: 14px;
+    }
+    .div-4 {
+      border-radius: 47px;
+      background-color: #e26d5c;
+      display: flex;
+      margin-top: 12px;
+      width: 100%;
+      max-width: 1210px;
+      flex-direction: column;
+      align-items: start;
+      font-size: 43px;
+      padding: 67px 80px;
+    }
+    @media (max-width: 991px) {
+      .div-4 {
+        max-width: 100%;
+        padding: 0 20px;
+      }
+    }
+    .div-5 {
+      color: #ffe1a8;
+      font-family: Jockey One, sans-serif;
+      align-self: center;
+    }
+    .div-6 {
+      font-family: Jockey One, sans-serif;
+      margin: 46px 0 0 11px;
+    }
+    @media (max-width: 991px) {
+      .div-6 {
+        max-width: 100%;
+        margin-top: 40px;
+      }
+    }
+    .div-7 {
+      font-family: Jockey One, sans-serif;
+      border-radius: 10px;
+      background-color: #7dbbc3;
+      width: 958px;
+      max-width: 100%;
+      align-items: start;
+      justify-content: center;
+      margin: 40px 0 0 17px;
+      padding: 36px 11px;
+    }
+    @media (max-width: 991px) {
+      .div-7 {
+        padding-right: 20px;
+      }
+    }
+    .div-8 {
+      font-family: Jockey One, sans-serif;
+      border-radius: 10px;
+      background-color: #7dbbc3;
+      width: 958px;
+      max-width: 100%;
+      align-items: start;
+      justify-content: center;
+      margin: 14px 0 0 17px;
+      padding: 32px 11px;
+    }
+    @media (max-width: 991px) {
+      .div-8 {
+        padding-right: 20px;
+      }
+    }
+    .div-9 {
+      font-family: Jockey One, sans-serif;
+      border-radius: 10px;
+      background-color: #7dbbc3;
+      width: 958px;
+      max-width: 100%;
+      align-items: start;
+      justify-content: center;
+      margin: 17px 0 0 17px;
+      padding: 36px 11px;
+    }
+    @media (max-width: 991px) {
+      .div-9 {
+        padding-right: 20px;
+      }
+    }
+    .div-10 {
+      font-family: Jockey One, sans-serif;
+      border-radius: 10px;
+      background-color: #7dbbc3;
+      width: 958px;
+      max-width: 100%;
+      align-items: start;
+      white-space: nowrap;
+      justify-content: center;
+      margin: 17px 0 0 17px;
+      padding: 32px 11px;
+    }
+    @media (max-width: 991px) {
+      .div-10 {
+        padding-right: 20px;
+        white-space: initial;
+      }
+    }
+    .div-11 {
+      font-family: Jockey One, sans-serif;
+      border-radius: 10px;
+      background-color: #7dbbc3;
+      width: 958px;
+      max-width: 100%;
+      align-items: start;
+      justify-content: center;
+      margin: 17px 0 78px 17px;
+      padding: 36px 11px;
+    }
+    @media (max-width: 991px) {
+      .div-11 {
+        padding-right: 20px;
+        margin-bottom: 40px;
+      }
+    }
+    .div-12 {
+      border-radius: 47px;
+      background-color: #e26d5c;
+      margin-top: 20px;
+      width: 577px;
+      max-width: 100%;
+      align-items: center;
+      text-align: center;
+      justify-content: center;
+      padding: 76px 60px;
+      font: 64px Jockey One, sans-serif;
+    }
+    @media (max-width: 991px) {
+      .div-12 {
+        font-size: 40px;
+        padding: 0 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="div">
+    <div class="div-2">
+      <div class="div-3">Rhythm Roots</div>
+      <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/74472c7445f2c4fdf6f432cdd912b1ba9d7ab8290089515477164f75788608d7?" class="img" />
+    </div>
+    <div class="div-4">
+      <div class="div-5">Music Taste Questionnaire</div>
+      <div id="question-container" class="div-6">
+        <!-- Question will be inserted here -->
+      </div>
+      <div id="options-container" class="div-7">
+        <!-- Options will be inserted here -->
+      </div>
+    </div>
+    <div id="submit-button" class="div-12" onclick="submitAnswers()">Curate Results</div>
+  </div>
+
+  <script>
+    // Function to display the question and options
+    function displayQuestion(question) {
+      var questionContainer = document.getElementById("question-container");
+      var optionsContainer = document.getElementById("options-container");
+
+      // Clear previous content
+      questionContainer.innerHTML = "";
+      optionsContainer.innerHTML = "";
+
+      // Display the question
+      var questionElement = document.createElement("div");
+      questionElement.textContent = question.text;
+      questionContainer.appendChild(questionElement);
+
+      // Display options
+      for (var i = 0; i < question.options.length; i++) {
+        var optionElement = document.createElement("div");
+        optionElement.textContent = question.options[i];
+        optionElement.setAttribute("onclick", "selectOption(this)");
+        optionsContainer.appendChild(optionElement);
+      }
+    }
+
+    // Function to handle option selection
+    function selectOption(option) {
+      // Highlight selected option
+      var options = document.querySelectorAll("#options-container div");
+      for (var i = 0; i < options.length; i++) {
+        options[i].classList.remove("selected");
+      }
+      option.classList.add("selected");
+    }
+
+    // Function to submit answers
+    function submitAnswers() {
+      // Retrieve selected option
+      var selectedOption = document.querySelector("#options-container .selected");
+
+      if (selectedOption) {
+        var selectedText = selectedOption.textContent;
+        // Send selected answer to server or perform further actions
+        console.log("Selected option:", selectedText);
+      } else {
+        console.log("Please select an option.");
+      }
+    }
+
+    // Sample question data
+    var question1 = {
+      text: "When you need a musical boost, what's your vibe?",
+      options: [
+        "Amp me up with intense beats (Hip-Hop/Rap, Electronic/Dance)",
+        "Let's get moving with uplifting rhythms (Pop)",
+        "I crave soul-touching melodies (R&B/Soul, Jazz, Blues)",
+        "Take me on a journey with deep lyrics (Indie, Rock/Alternative)",
+        "Feel inspired by soul-lifting gospel and blues:"
+      ]
+    };
+
+    // Display the first question
+    displayQuestion(question1);
+  </script>
+</body>
+</html>

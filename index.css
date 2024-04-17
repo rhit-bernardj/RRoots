@@ -369,4 +369,47 @@
     color: #472d30;
     font-family: Poppins;
 }
+.questionnaire {
+    width: 100%;
+    position: relative;
+    background-color: #ffe1a8;
+    height: auto;
+    text-align: left;
+    font-size: 36px;
+    color: #000;
+    font-family: 'Jockey One', sans-serif;
+    padding: 25px 41px 80px 18px;
+}
+
+.questionnaire .header {
+    color: #7dbbc3;
+    font-size: 42px;
+    margin-bottom: 20px;
+}
+
+.questionnaire .question {
+    margin-bottom: 20px;
+}
+
+.questionnaire .options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.questionnaire .option {
+    border-radius: 10px;
+    background-color: #7dbbc3;
+    padding: 20px;
+    font-family: 'Jockey One', sans-serif;
+    cursor: pointer;
+}
+
+.questionnaire .option:hover {
+    background-color: #6aa8b8;
+}
+
+.questionnaire .option:first-child {
+    margin-top: 10px;
+}
 
