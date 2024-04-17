@@ -1,7 +1,7 @@
 // Answer.java
 public class Answer {
-    private String artist;
-    private int points;
+    String artist;
+    int points;
 
     // Constructor
     public Answer(String artist, int points) {
