@@ -3,40 +3,39 @@ import java.util.List;
 import java.util.Map;
 
 public class Results {
-    private Questionaire questionnaireItem;
+    private Questionaire questionaireItem;
 
-    // results created from questionaire
     public Results(Questionaire questionnaireItem) {
-        this.questionnaireItem = questionnaireItem;
+        this.questionaireItem = questionnaireItem;
     }
 
-    // this should calculate the top artists based on selected answer
+    // Method to calculate the top artists based on selected answers
     public Map<String, Integer> calculateTopArtists() {
-        // A map to store artist names/their points
         Map<String, Integer> artistPoints = new HashMap<>();
-
-        // pull selected answers from the questionnaire
-        List<Answer> selectedAnswers = questionnaireItem.getSelectedAnswers();
-
-        // run through all answers to get all the points
+        List<Answer> selectedAnswers = questionaireItem.getSelectedAnswers();
+        
+        // Calculate points for each artist based on selected answers
         for (Answer answer : selectedAnswers) {
-            String artist = answer.getArtist(); // get the artist name from the answer
-            int points = answer.getPoints(); // get points assigned to the answer
-            //update all the points for artists
+            String artist = answer.getArtist();
+            int points = answer.getPoints();
             artistPoints.put(artist, artistPoints.getOrDefault(artist, 0) + points);
         }
-
-        return artistPoints; // return the points
+        
+        return artistPoints;
     }
 
-    // this should display the points and the artist
-    public void displayTopArtists() {
-        Map<String, Integer> topArtists = calculateTopArtists(); // calculate the top artists
-
-        // display the top artists from most to least points
-        System.out.println("Top Artists:");
-        topArtists.entrySet().stream()
-                .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
-                .forEach(entry -> System.out.println(entry.getKey() + ": " + entry.getValue() + " points"));
+    // Method to generate HTML code for displaying top artists
+    public String generateTopArtistsHTML() {
+        Map<String, Integer> topArtists = calculateTopArtists();
+        StringBuilder html = new StringBuilder();
+        
+        // Add HTML for each top artist
+        for (Map.Entry<String, Integer> entry : topArtists.entrySet()) {
+            String artist = entry.getKey();
+            int points = entry.getValue();
+            html.append("<div>").append(artist).append(": ").append(points).append(" points</div>");
+        }
+        
+        return html.toString();
     }
 }
