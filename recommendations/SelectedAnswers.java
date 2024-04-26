@@ -1,4 +1,5 @@
-package main;
+package recommendations;
+
 public class SelectedAnswers {
     private String question;
     private String option;

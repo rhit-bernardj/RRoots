@@ -1,6 +1,8 @@
-package main;
+package recommendations;
+
 
 import javax.swing.*;
+
 import java.awt.*;
 
 public class ResultsFrame extends JFrame {
