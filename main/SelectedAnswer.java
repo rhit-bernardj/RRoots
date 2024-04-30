@@ -1,9 +1,10 @@
 package main;
-public class SelectedAnswers {
+
+public class SelectedAnswer {
     private String question;
     private String option;
 
-    public SelectedAnswers(String question, String option) {
+    public SelectedAnswer(String question, String option) {
         this.question = question;
         this.option = option;
     }

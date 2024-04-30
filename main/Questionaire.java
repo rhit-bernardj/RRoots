@@ -4,54 +4,182 @@ import java.util.List;
 
 public class Questionaire {
     private List<Question> questions;
-    private List<SelectedAnswers> selectedAnswers;
+    private List<SelectedAnswer> selectedAnswers;
 
+    // empties the questionaire made in main
     public Questionaire() {
         this.questions = new ArrayList<>();
         this.selectedAnswers = new ArrayList<>();
-        initializeQuestions();
-    }
+        initializeQuestions(); //puts question in empty questionaire
+
 
     private void initializeQuestions() {
-        // Add questions to the questionnaire
-        questions.add(Question.createQuestion1());
-        // Add more questions here if needed
+        questions.add(createQuestion1());
+        questions.add(createQuestion2());
+        questions.add(createQuestion3());
+        questions.add(createQuestion4());
+        questions.add(createQuestion5());
+        questions.add(createQuestion6());
+        questions.add(createQuestion7());
+        questions.add(createQuestion8());
+        questions.add(createQuestion9());
+        questions.add(createQuestion10());
+        // we will add more later
     }
 
     
-    
-    
-    
-    // Method to grab questions
     public List<Question> getQuestions() {
         return questions;
     }
-    
-    
-    
 
-    // Method to pick answer from question
+    // okay so this should work as the logic for the selected answer through the questions
     public void selectAnswer(int questionIndex, int optionIndex) {
-        Question current = getCurrentQuestion(questionIndex);
-        if (current != null) {
-            List<String> options = current.getOptions();
-            if (optionIndex >= 0 && optionIndex < options.size()) {
-                String selectedOption = options.get(optionIndex);
-                selectedAnswers.add(new SelectedAnswers(current.getText(), selectedOption));
+        if (questionIndex >= 0 && questionIndex < questions.size()) {
+            // above this should makes sure that it is selecting answers only throught the # of questions we have because we were having probelems indexing
+            Question currentQuestion = questions.get(questionIndex);
+            if (optionIndex >= 0 && optionIndex < currentQuestion.getOptions().size()) {
+                // same as before but checking it for the options
+                String selectedOption = currentQuestion.getOptions().get(optionIndex);
+                selectedAnswers.add(new SelectedAnswer(currentQuestion.getText(), selectedOption));
+                // Create a new SelectedAnswer object and add it to the selectedAnswers list
             }
         }
     }
 
-    // method to get the selected answers
-    public List<SelectedAnswers> getSelectedAnswers() {
+    // grabs the selected answers
+    public List<SelectedAnswer> getSelectedAnswers() {
         return selectedAnswers;
     }
 
-    // method to get the current question
-    Question getCurrentQuestion(int questionIndex) {
-        if (questionIndex >= 0 && questionIndex < questions.size()) {
-            return questions.get(questionIndex);
-        }
-        return null;
+    // creates the question
+    private Question createQuestion1() {
+        String text = "When you need a musical boost, what's your vibe?";
+        List<String> options = List.of(
+                "Amp me up with intense beats",
+                "Let's get moving with uplifting rhythms",
+                "I crave soul-touching melodies",
+                "Take me on a journey with deep lyrics",
+                "Feel inspired by soul-lifting gospel and blues"
+        );
+
+        return new Question(text, options);
+    }
+
+    private Question createQuestion2() {
+        String text = "What draws you to a song first?";
+        List<String> options = List.of(
+                "The storytelling in the lyrics",
+                "A catchy, memorable hook",
+                "The energy and rhythm that get me moving",
+                "The emotional pull of the vocals",
+                "The intricacy of the instrumental arrangement"
+        );
+
+        return new Question(text, options);
+    }
+
+    private Question createQuestion3() {
+        String text = "How do you like to discover new music?";
+        List<String> options = List.of(
+                "Exploring global sounds and rhythms",
+                "Through high-energy playlists for my workouts",
+                "In the background of cozy nights or dinners",
+                "By delving into artists with deep, meaningful messages",
+                "Discovering tracks with powerful messages and community spirit"
+        );
+
+        return new Question(text, options);
+    }
+
+    private Question createQuestion4() {
+        String text = "How do you prefer to spend your leisure time?";
+        List<String> options = List.of(
+                "Discovering new hobbies and experiences",
+                "Enjoying lively parties and social gatherings",
+                "Relaxing with a book or a movie",
+                "Engaging in active or outdoor activities",
+                "Exploring creative expression and introspection"
+        );
+
+        return new Question(text, options);
+    }
+
+    private Question createQuestion5() {
+        String text = "When you're feeling down, what's your go-to music?";
+        List<String> options = List.of(
+                "Heartfelt ballads and soulful tunes",
+                "Dynamic beats and energetic anthems",
+                "Light-hearted pop and catchy melodies",
+                "Inspirational lyrics and powerful messages",
+                "The soothing harmony of instrumental music"
+        );
+
+        return new Question(text, options);
+    }
+
+    private Question createQuestion6() {
+        String text = "What's your go-to vibe for a relaxing evening at home after a busy market day?";
+        List<String> options = List.of(
+                "Soulful R&B",
+                "Soothing Acoustic vibe",
+                "Light soulful melodies",
+                "Easy-listening jazz",
+                "Intimate indie tunes"
+        );
+
+        return new Question(text, options);
+    }
+
+    private Question createQuestion7() {
+        String text = "What music background do you prefer while cooking your favorite Nigerian dish?";
+        List<String> options = List.of(
+                "Up-tempo pop to make cooking fun",
+                "Vibrant Afrosoul rhythms that stir the spirit and uplift the room",
+                "Soul classics to enrich the culinary experience",
+                "Instrumental world music for culinary inspiration",
+                "Rock anthems to energize the kitchen"
+        );
+
+        return new Question(text, options);
+    }
+
+    private Question createQuestion8() {
+        String text = "Select the musical style that gets you moving to the beat?";
+        List<String> options = List.of(
+                "Pop energy that lights up the room",
+                "An electronic dance track that's all the rage",
+                "Hip-hop with a powerful punch",
+                "An indie anthem with a catchy chorus",
+                "A blues-infused track with a groove",
+                "Country beats with a lively tempo"
+        );
+
+        return new Question(text, options);
+    }
+
+    private Question createQuestion9() {
+        String text = "What music do you listen to during a rainy day?";
+        List<String> options = List.of(
+                "Cozy acoustic vibes",
+                "Smooth jazz",
+                "Reflective smooth songs",
+                "Soft rock ballads",
+                "Emotional blues and soul"
+        );
+
+        return new Question(text, options);
+    }
+
+    private Question createQuestion10() {
+        String text = "Your go-to sound for Lagos traffic?";
+        List<String> options = List.of(
+                "Upbeat hits to turn traffic time into a sing-along session",
+                "Uplifting stories in song",
+                "Energizing rock songs to beat the traffic blues",
+                "Pumping electronic beats",
+                "Pop anthems for mood lifting"
+        );
+
+        return new Question(text, options);
     }
 }

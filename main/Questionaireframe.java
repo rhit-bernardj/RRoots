@@ -1,74 +1,114 @@
 package main;
-import javax.swing.*;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
 public class Questionaireframe extends JPanel {
-    private static Questionaire questionaire; // Change: Made questionaire static
-    private int currentQuestionIndex; // To keep track of the current question index
+    private Questionaire questionaire;
+    private int currentQuestionIndex;
+
+    private JLabel questionLabel;
+    private JComboBox<String> optionsComboBox;
+    private JButton nextButton;
+    private JButton backButton;
 
     public Questionaireframe(Questionaire questionaire) {
-        Questionaireframe.questionaire = questionaire;
-        this.currentQuestionIndex = 0; // Start from the first question
-        displayCurrentQuestion();
+        this.questionaire = questionaire;
+        this.currentQuestionIndex = 0;
+
+        initializeUI();
+        displayQuestion();
     }
 
-    private void displayCurrentQuestion() {
-        removeAll(); // Clear the panel before adding new components
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        setBackground(new Color(255, 225, 168)); // Light orange background color
+    private void initializeUI() {
+        setPreferredSize(new Dimension(600, 200));
+        setBackground(new Color(255, 225, 168)); // Set background color
+        setLayout(new FlowLayout());
 
+        questionLabel = new JLabel();
+        questionLabel.setFont(new Font("Arial", Font.BOLD, 16));
+        questionLabel.setForeground(new Color(125, 187, 195)); // Set text color
+        add(questionLabel);
+
+        optionsComboBox = new JComboBox<>();
+        optionsComboBox.setPreferredSize(new Dimension(300, 30));
+        add(optionsComboBox);
+
+        nextButton = new JButton("Next");
+        nextButton.setBackground(new Color(226, 109, 92)); // Set button background color
+        nextButton.setForeground(Color.WHITE); // Set button text color
+        nextButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                processNextQuestion();
+            }
+        });
+        add(nextButton);
+
+        backButton = new JButton("Back");
+        backButton.setBackground(new Color(72, 133, 237)); // Set button background color
+        backButton.setForeground(Color.WHITE); // Set button text color
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                processPreviousQuestion();
+            }
+        });
+        add(backButton);
+    }
+
+    private void displayQuestion() {
         List<Question> questions = questionaire.getQuestions();
-        if (currentQuestionIndex >= 0 && currentQuestionIndex < questions.size()) {
+        if (currentQuestionIndex < questions.size()) {
             Question currentQuestion = questions.get(currentQuestionIndex);
+            questionLabel.setText(currentQuestion.getText());
 
-            // Display the current question
-            JLabel questionLabel = new JLabel(currentQuestion.getText());
-            questionLabel.setFont(new Font("Arial", Font.PLAIN, 20));
-            questionLabel.setForeground(Color.WHITE);
-            add(questionLabel);
-
-            // Display the options for the current question
-            List<String> options = currentQuestion.getOptions();
-            for (String option : options) {
-                JRadioButton radioButton = new JRadioButton(option);
-                radioButton.setFont(new Font("Arial", Font.PLAIN, 16));
-                radioButton.setBackground(new Color(255, 225, 168));
-                radioButton.setForeground(Color.WHITE);
-                add(radioButton);
+            optionsComboBox.removeAllItems();
+            for (String option : currentQuestion.getOptions()) {
+                optionsComboBox.addItem(option);
             }
 
-            // Add "Next" button
-            JButton nextButton = new JButton("Next");
-            nextButton.setFont(new Font("Arial", Font.BOLD, 20));
-            nextButton.setBackground(new Color(226, 109, 92)); // Light red background color
-            nextButton.setForeground(Color.WHITE);
-            nextButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-            nextButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    processSelectedAnswers();
-                    currentQuestionIndex++; // Move to the next question
-                    displayCurrentQuestion(); // Display the next question
-                }
-            });
-            add(nextButton);
+            // Enable or disable back button based on current question index
+            backButton.setEnabled(currentQuestionIndex > 0);
 
-            revalidate(); // Refresh the panel to reflect the changes
+            // Repaint the panel to reflect the updated components
+            revalidate();
+            repaint();
+        } else {
+            showResults();
         }
     }
 
-    void processSelectedAnswers() {
-        // Process selected answers
-        // This method should handle the logic for processing the selected answers
-        // For example, updating the selected answers list in the Questionnaire object
-        // Or performing any necessary calculations or validations
+    private void processNextQuestion() {
+        int selectedOptionIndex = optionsComboBox.getSelectedIndex();
+        if (selectedOptionIndex != -1) {
+            questionaire.selectAnswer(currentQuestionIndex, selectedOptionIndex);
+            currentQuestionIndex++;
+            displayQuestion(); // Display the next question
+        } else {
+            JOptionPane.showMessageDialog(this, "Please select an option.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
-    public static Questionaire getQuestionnaire() {
-        return questionaire;
+    private void processPreviousQuestion() {
+        if (currentQuestionIndex > 0) {
+            currentQuestionIndex--;
+            displayQuestion(); // Display the previous question
+        }
+    }
+
+    private void showResults() {
+        // Assuming this component will be added to a JFrame elsewhere
+        SwingUtilities.getWindowAncestor(this).dispose(); // Close the current frame
+
+        Results results = new Results(questionaire.getSelectedAnswers());
+        ResultsFrame resultsFrame = new ResultsFrame(results);
+        // Assuming ResultsFrame is designed to be a standalone JFrame
+        resultsFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        resultsFrame.setSize(800, 600);
+        resultsFrame.setVisible(true);
     }
 }
