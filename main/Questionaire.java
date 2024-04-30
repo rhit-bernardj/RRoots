@@ -11,6 +11,7 @@ public class Questionaire {
         this.questions = new ArrayList<>();
         this.selectedAnswers = new ArrayList<>();
         initializeQuestions(); //puts question in empty questionaire
+    }
 
 
     private void initializeQuestions() {
