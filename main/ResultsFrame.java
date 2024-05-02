@@ -51,9 +51,9 @@ public class ResultsFrame extends JFrame {
 
     public static void main(String[] args) {
         List<SelectedAnswer> selectedAnswers = new ArrayList<>();
-        // Create a Results object from selected answers
+        // create a Results object from selected answers
         Results results = new Results(selectedAnswers);
-        // Create a ResultsFrame with the Results object
+        // create a ResultsFrame 
         ResultsFrame resultsFrame = new ResultsFrame(results);
         resultsFrame.pack();
         resultsFrame.setVisible(true);
