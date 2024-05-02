@@ -1,11 +1,12 @@
 package main;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
+
 
 public class Results {
     private Map<String, Integer> artistPoints;
@@ -19,7 +20,7 @@ public class Results {
         for (SelectedAnswer answer : selectedAnswers) {
             String selectedOption = answer.getOption();
 
-            // Update artist points based on the selected option
+            // update the artist points based on the selected option
             switch (selectedOption) {
                 case "Amp me up with intense beats":
                     artistPoints.merge("Travis Scott", 1, Integer::sum);
@@ -231,14 +232,25 @@ public class Results {
         }
     }
 
-    public List<Artist> getTopThreeArtists() {
-        // Convert artistPoints to a list of Artist objects and sort by points
-        List<Artist> artists = artistPoints.entrySet().stream()
-                .map(entry -> new Artist(entry.getKey(), entry.getValue()))
-                .sorted(Comparator.comparingInt(Artist::getPoints).reversed())
-                .collect(Collectors.toList());
-
-        // Return the top three artists or less if fewer than three artists are available
-        return artists.subList(0, Math.min(3, artists.size()));
+   public List<Artist> getTopThreeArtists() {
+    List<Artist> artists = new ArrayList<>();
+    // iterate through each entry in the artistPoints map
+    for (Map.Entry<String, Integer> entry : artistPoints.entrySet()) {
+        String artistName = entry.getKey();
+        int points = entry.getValue();
+        artists.add(new Artist(artistName, points));
     }
+
+    // sort the list of artists based on points in descending order
+    Collections.sort(artists, new Comparator<Artist>() {
+        @Override
+        public int compare(Artist a1, Artist a2) {
+            return Integer.compare(a2.getPoints(), a1.getPoints()); // Reversed order
+        }
+    });
+
+    // return the top three artists or less if fewer than three artists are available
+    return artists.subList(0, Math.min(3, artists.size()));
+}
+
 }

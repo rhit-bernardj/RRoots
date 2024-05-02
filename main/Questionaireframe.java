@@ -34,12 +34,12 @@ public class Questionaireframe extends JPanel {
         add(questionLabel);
 
         optionsComboBox = new JComboBox<>();
-        optionsComboBox.setPreferredSize(new Dimension(300, 30));
+        optionsComboBox.setPreferredSize(new Dimension(380, 30));
         add(optionsComboBox);
-
+//set the button and text colors
         nextButton = new JButton("Next");
-        nextButton.setBackground(new Color(226, 109, 92)); // Set button background color
-        nextButton.setForeground(Color.WHITE); // Set button text color
+        nextButton.setBackground(new Color(226, 109, 92)); 
+        nextButton.setForeground(Color.WHITE); 
         nextButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -47,10 +47,10 @@ public class Questionaireframe extends JPanel {
             }
         });
         add(nextButton);
-
+        
         backButton = new JButton("Back");
-        backButton.setBackground(new Color(72, 133, 237)); // Set button background color
-        backButton.setForeground(Color.WHITE); // Set button text color
+        backButton.setBackground(new Color(72, 133, 237)); 
+        backButton.setForeground(Color.WHITE);
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -71,14 +71,14 @@ public class Questionaireframe extends JPanel {
                 optionsComboBox.addItem(option);
             }
 
-            // Enable or disable back button based on current question index
+            // enable or disable the back button based on the current question index
             backButton.setEnabled(currentQuestionIndex > 0);
 
-            // Repaint the panel to reflect the updated components
-            revalidate();
+            // repaint the panel to reflect the updated components
+            revalidate(); // recalculate the layout for the JFrame
             repaint();
         } else {
-            showResults();
+            showResults(null);
         }
     }
 
@@ -87,7 +87,8 @@ public class Questionaireframe extends JPanel {
         if (selectedOptionIndex != -1) {
             questionaire.selectAnswer(currentQuestionIndex, selectedOptionIndex);
             currentQuestionIndex++;
-            displayQuestion(); // Display the next question
+            displayQuestion(); 
+            // display the next question
         } else {
             JOptionPane.showMessageDialog(this, "Please select an option.", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -96,12 +97,13 @@ public class Questionaireframe extends JPanel {
     private void processPreviousQuestion() {
         if (currentQuestionIndex > 0) {
             currentQuestionIndex--;
-            displayQuestion(); // Display the previous question
-        }
+            displayQuestion();    
+        } 
+        // display the previous question
     }
 
-    private void showResults() {
-        // Assuming this component will be added to a JFrame elsewhere
+    private void showResults(JFrame frame) {
+        // assuming this component will be added to a JFrame elsewhere
         SwingUtilities.getWindowAncestor(this).dispose(); // Close the current frame
 
         Results results = new Results(questionaire.getSelectedAnswers());
