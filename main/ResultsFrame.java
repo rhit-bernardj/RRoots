@@ -6,14 +6,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ResultsFrame extends JFrame {
-    private Results results; // Store the Results object
+    private Results results; 
 
     public ResultsFrame(Results results) {
-        this.results = results; // Initialize the Results object
+        this.results = results; 
         setTitle("Top Artists Recommendations");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         getContentPane().setBackground(new Color(255, 225, 168)); 
-        displayTopArtists(); // Display the top artists
+        displayTopArtists(); 
+        //display the artist results
     }
 
     private void displayTopArtists() {
@@ -49,17 +50,12 @@ public class ResultsFrame extends JFrame {
     }
 
     public static void main(String[] args) {
-        // This part should be handled in the QuestionnaireFrame class
         List<SelectedAnswer> selectedAnswers = new ArrayList<>();
-        // Populate selectedAnswers with questionnaire responses
-    
         // Create a Results object from selected answers
         Results results = new Results(selectedAnswers);
-    
         // Create a ResultsFrame with the Results object
         ResultsFrame resultsFrame = new ResultsFrame(results);
         resultsFrame.pack();
-        resultsFrame.setLocationRelativeTo(null); // Center the frame on the screen
         resultsFrame.setVisible(true);
     }
     
