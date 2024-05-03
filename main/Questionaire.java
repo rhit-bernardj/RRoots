@@ -46,7 +46,9 @@ public class Questionaire {
             }
         }
     }
-
+//try while loop for selecting multiple
+//look into checkboxes, think about limits and error cases like selecting all options
+//look into txt files for saved results
     // grabs the selected answers
     public List<SelectedAnswer> getSelectedAnswers() {
         return selectedAnswers;

@@ -22,21 +22,21 @@ public class Questionaireframe extends JPanel {
         initializeUI();
         displayQuestion();
     }
-
+    //button interface
     private void initializeUI() {
         setPreferredSize(new Dimension(600, 200));
-        setBackground(new Color(255, 225, 168)); // Set background color
+        setBackground(new Color(255, 225, 168)); 
         setLayout(new FlowLayout());
 
         questionLabel = new JLabel();
         questionLabel.setFont(new Font("Arial", Font.BOLD, 16));
-        questionLabel.setForeground(new Color(125, 187, 195)); // Set text color
+        questionLabel.setForeground(new Color(125, 187, 195)); 
         add(questionLabel);
 
         optionsComboBox = new JComboBox<>();
         optionsComboBox.setPreferredSize(new Dimension(380, 30));
         add(optionsComboBox);
-//set the button and text colors
+    //set the button and text colors
         nextButton = new JButton("Next");
         nextButton.setBackground(new Color(226, 109, 92)); 
         nextButton.setForeground(Color.WHITE); 
@@ -71,7 +71,7 @@ public class Questionaireframe extends JPanel {
                 optionsComboBox.addItem(option);
             }
 
-            // enable or disable the back button based on the current question index
+            // enable or disable the back button based on the current question (if first, disabled)
             backButton.setEnabled(currentQuestionIndex > 0);
 
             // repaint the panel to reflect the updated components
@@ -108,7 +108,7 @@ public class Questionaireframe extends JPanel {
 
         Results results = new Results(questionaire.getSelectedAnswers());
         ResultsFrame resultsFrame = new ResultsFrame(results);
-        // Assuming ResultsFrame is designed to be a standalone JFrame
+        // assuming ResultsFrame is designed to be a standalone JFrame
         resultsFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         resultsFrame.setSize(800, 600);
         resultsFrame.setVisible(true);
