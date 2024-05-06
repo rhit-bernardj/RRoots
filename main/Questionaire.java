@@ -1,20 +1,24 @@
 package main;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Questionaire {
     private List<Question> questions;
-    private List<SelectedAnswer> selectedAnswers;
+    private Map<Integer, List<String>> selectedAnswers; // Change to use Map for selectedAnswers
 
-    // empties the questionaire made in main
+    // Constructor to initialize the questionnaire with an empty list of questions and selected answers
     public Questionaire() {
         this.questions = new ArrayList<>();
-        this.selectedAnswers = new ArrayList<>();
-        initializeQuestions(); //puts question in empty questionaire
+        this.selectedAnswers = new HashMap<>(); // Initialize selectedAnswers as a HashMap
+        initializeQuestions(); // Populate the questionnaire with initial questions
     }
 
-
+    // Method to initialize the questionnaire with predefined questions
     private void initializeQuestions() {
+        // Create and add questions to the questionnaire
         questions.add(createQuestion1());
         questions.add(createQuestion2());
         questions.add(createQuestion3());
@@ -25,36 +29,26 @@ public class Questionaire {
         questions.add(createQuestion8());
         questions.add(createQuestion9());
         questions.add(createQuestion10());
-        // we will add more later
+        // Add more questions here if needed
     }
 
-    
+    // Getter method to retrieve all questions in the questionnaire
     public List<Question> getQuestions() {
         return questions;
     }
 
-    // okay so this should work as the logic for the selected answer through the questions
-    public void selectAnswer(int questionIndex, int optionIndex) {
+    // Method to select answers for a specific question
+    public void selectAnswers(int questionIndex, List<String> selectedOptions) {
         if (questionIndex >= 0 && questionIndex < questions.size()) {
-            // above this should makes sure that it is selecting answers only throught the # of questions we have because we were having probelems indexing
-            Question currentQuestion = questions.get(questionIndex);
-            if (optionIndex >= 0 && optionIndex < currentQuestion.getOptions().size()) {
-                // same as before but checking it for the options
-                String selectedOption = currentQuestion.getOptions().get(optionIndex);
-                selectedAnswers.add(new SelectedAnswer(currentQuestion.getText(), selectedOption));
-                // Create a new SelectedAnswer object and add it to the selectedAnswers list
-            }
+            selectedAnswers.put(questionIndex, selectedOptions);
         }
     }
-//try while loop for selecting multiple
-//look into checkboxes, think about limits and error cases like selecting all options
-//look into txt files for saved results
-    // grabs the selected answers
-    public List<SelectedAnswer> getSelectedAnswers() {
+
+    // Getter method to retrieve the map of selected answers
+    public Map<Integer, List<String>> getSelectedAnswers() {
         return selectedAnswers;
     }
-
-    // creates the question
+    // Utility method to create the first question with its options
     private Question createQuestion1() {
         String text = "When you need a musical boost, what's your vibe?";
         List<String> options = List.of(

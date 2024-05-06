@@ -1,19 +1,37 @@
 package main;
 
+import java.util.List;
+
 public class SelectedAnswer {
-    private String question;
-    private String option;
+    private Integer questionIndex;
+    private List<String> selectedOptions;
 
-    public SelectedAnswer(String question, String option) {
-        this.question = question;
-        this.option = option;
+    public SelectedAnswer(Integer questionIndex, List<String> selectedOptions) {
+        this.questionIndex = questionIndex;
+        this.selectedOptions = selectedOptions;
     }
 
-    public String getQuestion() {
-        return question;
+    public Integer getQuestionIndex() {
+        return questionIndex;
     }
 
-    public String getOption() {
-        return option;
+    public void setQuestionIndex(Integer questionIndex) {
+        this.questionIndex = questionIndex;
+    }
+
+    public List<String> getSelectedOptions() {
+        return selectedOptions;
+    }
+
+    public void setSelectedOptions(List<String> selectedOptions) {
+        this.selectedOptions = selectedOptions;
+    }
+
+    // Method to retrieve the selected option (assuming it's the first one in the list)
+    public String getSelectedOption() {
+        if (selectedOptions != null && !selectedOptions.isEmpty()) {
+            return selectedOptions.get(0); // Return the first selected option
+        }
+        return null; // Handle empty or null selectedOptions gracefully
     }
 }

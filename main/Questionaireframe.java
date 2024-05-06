@@ -4,14 +4,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class Questionaireframe extends JPanel {
     private Questionaire questionaire;
     private int currentQuestionIndex;
 
     private JLabel questionLabel;
-    private JComboBox<String> optionsComboBox;
+    private JPanel optionsPanel;
     private JButton nextButton;
     private JButton backButton;
 
@@ -22,34 +24,27 @@ public class Questionaireframe extends JPanel {
         initializeUI();
         displayQuestion();
     }
-    //button interface
+
     private void initializeUI() {
-        setPreferredSize(new Dimension(600, 200));
-        setBackground(new Color(255, 225, 168)); 
-        setLayout(new FlowLayout());
+        setPreferredSize(new Dimension(600, 400));
+        setBackground(new Color(255, 225, 168));
+        setLayout(new BorderLayout());
 
         questionLabel = new JLabel();
         questionLabel.setFont(new Font("Arial", Font.BOLD, 16));
-        questionLabel.setForeground(new Color(125, 187, 195)); 
-        add(questionLabel);
+        questionLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        add(questionLabel, BorderLayout.NORTH);
 
-        optionsComboBox = new JComboBox<>();
-        optionsComboBox.setPreferredSize(new Dimension(380, 30));
-        add(optionsComboBox);
-    //set the button and text colors
-        nextButton = new JButton("Next");
-        nextButton.setBackground(new Color(226, 109, 92)); 
-        nextButton.setForeground(Color.WHITE); 
-        nextButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                processNextQuestion();
-            }
-        });
-        add(nextButton);
-        
+        optionsPanel = new JPanel();
+        optionsPanel.setLayout(new GridLayout(0, 1));
+        add(optionsPanel, BorderLayout.CENTER);
+
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setBackground(new Color(255, 225, 168));
+        buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+
         backButton = new JButton("Back");
-        backButton.setBackground(new Color(72, 133, 237)); 
+        backButton.setBackground(new Color(72, 133, 237));
         backButton.setForeground(Color.WHITE);
         backButton.addActionListener(new ActionListener() {
             @Override
@@ -57,58 +52,89 @@ public class Questionaireframe extends JPanel {
                 processPreviousQuestion();
             }
         });
-        add(backButton);
+        buttonPanel.add(backButton);
+
+        nextButton = new JButton("Next");
+        nextButton.setBackground(new Color(226, 109, 92));
+        nextButton.setForeground(Color.WHITE);
+        nextButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                processNextQuestion();
+            }
+        });
+        buttonPanel.add(nextButton);
+
+        add(buttonPanel, BorderLayout.SOUTH);
     }
 
     private void displayQuestion() {
         List<Question> questions = questionaire.getQuestions();
         if (currentQuestionIndex < questions.size()) {
             Question currentQuestion = questions.get(currentQuestionIndex);
-            questionLabel.setText(currentQuestion.getText());
+            questionLabel.setText((currentQuestionIndex + 1) + ". " + currentQuestion.getText());
 
-            optionsComboBox.removeAllItems();
+            optionsPanel.removeAll();
             for (String option : currentQuestion.getOptions()) {
-                optionsComboBox.addItem(option);
+                JCheckBox checkBox = new JCheckBox(option);
+                optionsPanel.add(checkBox);
             }
 
-            // enable or disable the back button based on the current question (if first, disabled)
             backButton.setEnabled(currentQuestionIndex > 0);
 
-            // repaint the panel to reflect the updated components
-            revalidate(); // recalculate the layout for the JFrame
+            revalidate();
             repaint();
         } else {
-            showResults(null);
+            showResults();
         }
     }
 
     private void processNextQuestion() {
-        int selectedOptionIndex = optionsComboBox.getSelectedIndex();
-        if (selectedOptionIndex != -1) {
-            questionaire.selectAnswer(currentQuestionIndex, selectedOptionIndex);
+        List<String> selectedOptions = new ArrayList<>();
+        Component[] components = optionsPanel.getComponents();
+        for (Component component : components) {
+            if (component instanceof JCheckBox) {
+                JCheckBox checkBox = (JCheckBox) component;
+                if (checkBox.isSelected()) {
+                    selectedOptions.add(checkBox.getText());
+                }
+            }
+        }
+
+        if (!selectedOptions.isEmpty()) {
+            questionaire.selectAnswers(currentQuestionIndex, selectedOptions);
             currentQuestionIndex++;
-            displayQuestion(); 
-            // display the next question
+            displayQuestion();
         } else {
-            JOptionPane.showMessageDialog(this, "Please select an option.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Please select at least one option.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     private void processPreviousQuestion() {
         if (currentQuestionIndex > 0) {
             currentQuestionIndex--;
-            displayQuestion();    
-        } 
-        // display the previous question
+            displayQuestion();
+        }
     }
 
-    private void showResults(JFrame frame) {
-        // assuming this component will be added to a JFrame elsewhere
-        SwingUtilities.getWindowAncestor(this).dispose(); // Close the current frame
+    private void showResults() {
+        SwingUtilities.getWindowAncestor(this).dispose();
+        
+        // Assuming questionaire.getSelectedAnswers() returns a Map<Integer, List<String>>
+        Map<Integer, List<String>> selectedOptionsMap = questionaire.getSelectedAnswers();
+        List<SelectedAnswer> selectedAnswers = new ArrayList<>();
 
-        Results results = new Results(questionaire.getSelectedAnswers());
+        // Convert the map entries into SelectedAnswer objects
+        for (Map.Entry<Integer, List<String>> entry : selectedOptionsMap.entrySet()) {
+            Integer questionIndex = entry.getKey();
+            List<String> options = entry.getValue();
+            SelectedAnswer selectedAnswer = new SelectedAnswer(questionIndex, options);
+            selectedAnswers.add(selectedAnswer);
+        }
+
+        // Now create Results using the converted List<SelectedAnswer>
+        Results results = new Results(selectedAnswers);
         ResultsFrame resultsFrame = new ResultsFrame(results);
-        // assuming ResultsFrame is designed to be a standalone JFrame
         resultsFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         resultsFrame.setSize(800, 600);
         resultsFrame.setVisible(true);
