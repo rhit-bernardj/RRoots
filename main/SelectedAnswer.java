@@ -5,10 +5,16 @@ import java.util.List;
 public class SelectedAnswer {
     private Integer questionIndex;
     private List<String> selectedOptions;
+    private Object getSelectedOption;
 
     public SelectedAnswer(Integer questionIndex, List<String> selectedOptions) {
         this.questionIndex = questionIndex;
         this.selectedOptions = selectedOptions;
+    }
+
+    public SelectedAnswer(String string) {
+        //TODO Auto-generated constructor stub
+        
     }
 
     public Integer getQuestionIndex() {
