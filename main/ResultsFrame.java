@@ -20,7 +20,7 @@ public class ResultsFrame extends JFrame {
         displayTopArtists(); 
         //display the artist results
     }
-
+//check if the panel is the issue
     private void displayTopArtists() {
         
         List<Artist> topArtists = results.getTopThreeArtists();
