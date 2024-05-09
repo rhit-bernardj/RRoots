@@ -16,7 +16,7 @@ public class Results {
         calculateArtistPoints(selectedAnswers);
     }
 
-    private void calculateArtistPoints(List<SelectedAnswer> selectedAnswers) {
+    void calculateArtistPoints(List<SelectedAnswer> selectedAnswers) {
         for (SelectedAnswer answer : selectedAnswers) {
             String selectedOption = answer.getSelectedOption();
 

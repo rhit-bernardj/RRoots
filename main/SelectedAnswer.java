@@ -3,6 +3,7 @@ package main;
 import java.util.List;
 
 public class SelectedAnswer {
+    private static Object String;
     private Integer questionIndex;
     private List<String> selectedOptions;
 
@@ -11,6 +12,7 @@ public class SelectedAnswer {
         this.selectedOptions = selectedOptions;
     }
 
+   
     public Integer getQuestionIndex() {
         return questionIndex;
     }
@@ -34,4 +36,6 @@ public class SelectedAnswer {
         }
         return null; // Handle empty or null selectedOptions gracefully
     }
+
+   
 }
