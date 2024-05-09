@@ -2,6 +2,10 @@ package main;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,10 +48,28 @@ public class ResultsFrame extends JFrame {
             downloadButton.setForeground(Color.WHITE);       
             downloadButton.setHorizontalAlignment((int) Component.CENTER_ALIGNMENT);
             add(downloadButton);
+            downloadButton.addActionListener(e -> saveResultsToFile());
             downloadButton.setPreferredSize(new Dimension(100, 35));
         }
             
     }
+
+    private void saveResultsToFile() {
+        String userHomeFolder = System.getProperty("user.home");
+        String filePath = userHomeFolder + "\\Downloads" + "\\QuizResults.txt";
+        File file = new File(filePath);  
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+            String text = "";
+            for(Artist art: results.getTopThreeArtists()) {
+                text += art.toString();
+                text += '\n';
+            }
+            writer.write(text);
+        } catch (IOException ex) {
+            System.err.println("File not found");
+        }
+    }
+
 
     public static void main(String[] args) {
         List<SelectedAnswer> selectedAnswers = new ArrayList<>();
