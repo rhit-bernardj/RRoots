@@ -11,11 +11,6 @@ public class SelectedAnswer {
         this.selectedOptions = selectedOptions;
     }
 
-    public SelectedAnswer(String string) {
-        //TODO Auto-generated constructor stub
-        
-    }
-
     public Integer getQuestionIndex() {
         return questionIndex;
     }
@@ -39,6 +34,4 @@ public class SelectedAnswer {
         }
         return null; // Handle empty or null
     }
-
-   
 }
