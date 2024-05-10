@@ -50,7 +50,7 @@ public class ResultsFrame extends JFrame {
 
         getContentPane().add(mainPanel);
     }
-
+//check if the panel is the issue
     private void displayTopArtists() {
         List<Artist> topArtists = results.getTopThreeArtists();
         if (topArtists != null) {

@@ -16,7 +16,7 @@ public class Results {
         calculateArtistPoints(selectedAnswers);
     }
 
-    private void calculateArtistPoints(List<SelectedAnswer> selectedAnswers) {
+    void calculateArtistPoints(List<SelectedAnswer> selectedAnswers) {
         for (SelectedAnswer answer : selectedAnswers) {
             String selectedOption = answer.getSelectedOption();
 
@@ -222,16 +222,20 @@ public class Results {
                 case "Upbeat hits to turn traffic time into a sing-along session":
                     artistPoints.merge("Kid Cudi", 1, Integer::sum);
                     artistPoints.merge("Gary Clark Jr.", 1, Integer::sum);
+                    break;
                 case "Uplifting stories in song":
                     artistPoints.merge("Jon Pardi", 1, Integer::sum);
                     artistPoints.merge("Kirk Franklin", 1, Integer::sum);
                     artistPoints.merge("Sunday Service Choir", 1, Integer::sum);
+                    break;
                 case "Energizing rock songs to beat the traffic blues":
                     artistPoints.merge("Foo Fighters", 1, Integer::sum);
                     artistPoints.merge("Green Day", 1, Integer::sum);
+                    break;
                 case "Pumping electronic beats":
                     artistPoints.merge("Calvin Harris", 1, Integer::sum);
                     artistPoints.merge("Fred again..", 1, Integer::sum);
+                    break;
                 case "Pop anthems for mood lifting":
                     artistPoints.merge("Dua Lipa", 1, Integer::sum);
                     artistPoints.merge("Kacey Musgraves", 1, Integer::sum);

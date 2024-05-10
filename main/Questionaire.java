@@ -7,9 +7,9 @@ import java.util.Map;
 
 public class Questionaire {
     private List<Question> questions;
-    private Map<Integer, List<String>> selectedAnswers; // Change to use Map for selectedAnswers
+    private Map<Integer, List<String>> selectedAnswers; 
 
-    // Constructor to initialize the questionnaire with an empty list of questions and selected answers
+    // emtpty questionaire list to store selected answers 
     public Questionaire() {
         this.questions = new ArrayList<>();
         this.selectedAnswers = new HashMap<>(); // Initialize selectedAnswers as a HashMap
