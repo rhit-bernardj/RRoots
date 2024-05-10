@@ -24,7 +24,7 @@ public class Artist {
         this.points = points;
     }
 
-    // You can optionally override toString() for better display of Artist object
+   //display
     @Override
     public String toString() {
         return name + " (" + points + " points)";

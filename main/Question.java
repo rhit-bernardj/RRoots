@@ -1,7 +1,7 @@
 package main;
 
 import java.util.List;
-
+//frame for each question
 public class Question {
     private String text;
     private List<String> options;
@@ -19,3 +19,4 @@ public class Question {
         return options;
     }
 }
+
